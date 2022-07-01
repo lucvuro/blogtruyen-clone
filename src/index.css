@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background: #6e7274 url(https://4.bp.blogspot.com/-sZRy7wUVmUo/WtyeEok9-TI/AAAAAAABiIk/bjAtb9tkNmkoIRkbxa3PL3KQXBtSLuimACKgBGAs/s3000/black-steel-background-3000x2000.jpg) center top fixed repeat;
 }
 
 code {

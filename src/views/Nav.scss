@@ -1,0 +1,53 @@
+.navbar {
+    background-color: #4176ed;
+    padding: 0px !important;
+    border-bottom: 3px #0dcaf0 solid;
+    .navbar-brand{
+        font-size: 20px;
+        text-shadow: 3px 3px 1px black;
+        font-weight: bold;
+        color: #fff !important;
+        margin: 3px 0 0 0;
+        display: inline-block;
+    }
+    .navbar-nav{
+        padding-left: 40px !important;
+    }
+}
+.navbar-light .navbar-nav .nav-link{
+    color: #FFF !important;
+    font-weight: bold;
+    transition: none !important
+}
+.nav-link:hover{
+    background-color: black;
+    border-radius: 0.5rem;
+}
+.btn-primary{
+    background-color: yellow !important;
+    color: black !important;
+    font-weight: bold !important;
+    margin-left: 5px !important;
+}
+.btn{
+    transition: none !important;
+    border-radius: 0px !important;
+}
+.dropdown-menu{
+    padding: 0 !important;
+    background-color: black !important;
+}
+.dropdown-item{
+    color: white !important;
+}
+.autocomplete{
+    position: absolute;
+    background-color: rgba(0,0,0,.8);
+    width: 230px !important;
+    max-height: 300px;
+    margin-top: 2.5rem !important;
+    color: white;
+    .autocomplete-item{
+        padding: 5px;
+    } 
+}

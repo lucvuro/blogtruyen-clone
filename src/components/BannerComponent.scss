@@ -1,0 +1,21 @@
+.banner{
+    .banner-navbar {
+        border: 0 !important;
+        background-color: #d4ff7e !important;
+        font-size: 14px;
+        padding-left: 0px !important;
+        .navbar-navv{
+            padding-left: 0px !important;
+            .item {
+                display: block;
+                padding: 0.5rem 1rem;
+                color: black !important;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            .item:hover{
+                background-color: #0dcaf0;
+            }
+        }
+    }
+}

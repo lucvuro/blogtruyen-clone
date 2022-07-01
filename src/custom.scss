@@ -1,0 +1,9 @@
+@import "bootstrap/scss/functions"; 
+@import "bootstrap/scss/variables";
+
+$container-max-widths: (
+  sm: 1000px,
+);
+
+@import "bootstrap";
+
