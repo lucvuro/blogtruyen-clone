@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav, Row, Col,NavDropdown } from 'react-bootstrap'
 import './BannerComponent.scss'
 const BannerComponent = () => {
     return (
@@ -11,7 +11,21 @@ const BannerComponent = () => {
                         <Nav className="navbar-navv">
                             <Nav.Link className="item" href="/">Tìm nâng cao</Nav.Link>
                             <Nav.Link className="item" href="/">Mini Forum</Nav.Link>
-                            <Nav.Link className="item" href="/">Thể loại</Nav.Link>
+                            {/* <Nav.Link className="item" href="/">Thể loại</Nav.Link> */}
+                            <NavDropdown className="dropdown" title="Thể loại">
+                                <NavDropdown.Item href="/">Liên hệ quảng cáo</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link className="item" href="/">Đủ bộ</Nav.Link>
                             <Nav.Link className="item" href="/">Hướng dẫn</Nav.Link>
                         </Nav>

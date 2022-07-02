@@ -1,3 +1,18 @@
 .homepage{
-    background: rgba(0,0,0,.5);
+    background: rgba(0,0,0,.5);   
+}
+.tieudiem{
+    background-color: #33a4cd;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .tieudiem-item{
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    h3{
+        color:white;
+        margin-top: 30px;
+        text-align: center;
+    }
 }
