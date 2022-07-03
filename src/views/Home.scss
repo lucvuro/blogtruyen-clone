@@ -41,7 +41,7 @@
         .listtruyen-list{
             .truyen{
                 background-color: white;
-                height: 400px;
+                height: auto;
                 .story-img{
                     max-height: 254px;
                     width: 254px;
@@ -52,6 +52,13 @@
                 .story-noidung{
                     text-align: justify;
                     word-wrap: break-word;
+                }
+                .truyen-footer{
+                    margin-top: 3px;
+                    margin-bottom: 6px;
+                    background-color: red;
+                    height: auto;
+                    font-size:14px
                 }
             }
         }

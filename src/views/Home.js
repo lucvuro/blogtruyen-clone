@@ -66,17 +66,42 @@ const Home = () => {
                                 <div className="truyen">
                                     <Container>
                                         <Row>
-                                            <Col md="6">
+                                            <Col md="4" xs="12">
                                                 <img className="img-thumbnail story-img mt-3" src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg" />
                                             </Col>
-                                            <Col md="6">
+                                            <Col md="8" xs="12">
                                                 <div className="story-tieude mt-2">
                                                     <h6>DETECTIVE CONAN</h6>
                                                 </div>
                                                 <div className="story-noidung">
-                                                    <p>Bạn muốn vượt qua kẻ ác để thoát khỏi cái chết một cách bình thường, nhưng tại sao nam chính và nữ chính lại cãi nhau? Đối tượng mà họ giành được có phải là tôi không? Tình địch quái gở lại tăng thêm rồi!  </p>
+                                                    <p>Bạn muốn vượt qua kẻ ác để thoát khỏi cái chết một cách bình thường, nhưng tại sao nam chính và nữ chính lại cãi nhau? Đối tượng mà họ giành được có phải là tôi không? Tình địch quái gở lại tăng thêm rồi!     </p>
                                                 </div>
                                             </Col>
+                                        </Row>
+                                        <Row>
+                                            <div className="truyen-footer">
+                                                <Container>
+                                                    <Row className="mt-3">
+                                                        <Col md="3">
+                                                            Tac gia
+                                                        </Col>
+                                                        <Col md="3">
+                                                            03/07/2022 23:44
+                                                        </Col>
+                                                        <Col md="3">
+                                                            105 chuong
+                                                        </Col>
+                                                        <Col md="3">
+                                                            So binh luan
+                                                        </Col>
+                                                    </Row>
+                                                    <Row className="mt-3">
+                                                        <Col md="12">
+                                                        Action Adventure Manhwa Shounen Fantasy
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </div>
                                         </Row>
                                     </Container>
                                 </div>
