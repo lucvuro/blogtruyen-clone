@@ -1,18 +1,77 @@
-.homepage{
-    background: rgba(0,0,0,.5);   
+.homepage {
+    background: rgba(0, 0, 0, .5);
 }
-.tieudiem{
+
+.tieudiem {
     background-color: #33a4cd;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    .tieudiem-item{
+
+    .tieudiem-item {
         margin-left: 30px;
         margin-top: 20px;
+        margin-bottom: 20px;
     }
-    h3{
-        color:white;
+
+    h3 {
+        color: white;
         margin-top: 30px;
         text-align: center;
     }
+}
+
+.listtruyen-container {
+    .type {
+        background-color: white;
+        width: 100&;
+        height: 38px;
+
+        .icon {
+            cursor: pointer;
+        }
+
+        .active {
+            color: #33a4cd;
+        }
+    }
+
+    .listtruyen {
+        width: 100%;
+        .listtruyen-list{
+            .truyen{
+                background-color: white;
+                height: 400px;
+                .story-img{
+                    max-height: 254px;
+                    width: 254px;
+                }
+                .story-tieude{
+                    text-align: center;
+                }
+                .story-noidung{
+                    text-align: justify;
+                    word-wrap: break-word;
+                }
+            }
+        }
+    }
+}
+
+.toplist-sidebar {
+    width: 100%;
+    height: 400px;
+    background-color: blue;
+}
+
+.newlist-sidebar {
+    width: 100%;
+    height: 400px;
+    background-color: red;
+}
+
+.binhluan-sidebar {
+    width: 100%;
+    height: 400px;
+    background-color: pink;
 }

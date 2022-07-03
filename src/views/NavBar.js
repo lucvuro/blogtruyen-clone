@@ -22,7 +22,7 @@ const NavBar = () => {
         }
     }, [value])
     return (<>
-        <Navbar collapseOnSelect expand="lg">
+        <Navbar fixed="top" collapseOnSelect expand="lg">
             <Container fluid="sm">
                 <Navbar.Brand >TRUYENCC.VN</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

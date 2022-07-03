@@ -1,7 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { useState } from 'react'
 import './Home.scss'
 import BannerComponent from "../components/BannerComponent";
 const Home = () => {
+    const [isListType, setListType] = useState(true)
     return (
         <Container className="homepage">
             <Row>
@@ -43,6 +45,59 @@ const Home = () => {
                         </Col>
                     </div>
                 </div>
+            </Row>
+            <Row>
+                <Col className="mt-3" md="8">
+                    <div className="listtruyen-container">
+                        <div className="type">
+                            <span className={isListType ? "pull-right icon active" : "pull-right icon"}
+                                style={{ margin: "7px" }}
+                                onClick={() => setListType(true)}>
+                                <i class="fa-solid fa-list"></i>
+                            </span>
+                            <span className={isListType ? "pull-right icon" : "pull-right icon active"}
+                                style={{ margin: "7px" }}
+                                onClick={() => setListType(false)}>
+                                <i class="fa-solid fa-border-all"></i>
+                            </span>
+                        </div>
+                        <div className="listtruyen mt-3">
+                            <div className="listtruyen-list">
+                                <div className="truyen">
+                                    <Container>
+                                        <Row>
+                                            <Col md="6">
+                                                <img className="img-thumbnail story-img mt-3" src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg" />
+                                            </Col>
+                                            <Col md="6">
+                                                <div className="story-tieude mt-2">
+                                                    <h6>DETECTIVE CONAN</h6>
+                                                </div>
+                                                <div className="story-noidung">
+                                                    <p>Bạn muốn vượt qua kẻ ác để thoát khỏi cái chết một cách bình thường, nhưng tại sao nam chính và nữ chính lại cãi nhau? Đối tượng mà họ giành được có phải là tôi không? Tình địch quái gở lại tăng thêm rồi!  </p>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </Container>
+                                </div>
+                            </div>
+                            <div classname="listtruyen-grid">
+
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+                <Col className="mt-3" md="4">
+                    <div className="toplist-sidebar">
+
+                    </div>
+                    <div className="newlist-sidebar">
+
+                    </div>
+                    <div className="binhluan-sidebar">
+
+                    </div>
+                </Col>
             </Row>
         </Container>
     )
