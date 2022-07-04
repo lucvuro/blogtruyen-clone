@@ -56,9 +56,26 @@
                 .truyen-footer{
                     margin-top: 3px;
                     margin-bottom: 6px;
-                    background-color: red;
+                    background-color: #e0e5ef;
                     height: auto;
                     font-size:14px
+                }
+            }
+        }
+    }
+    .grid-truyen{
+        .gridtruyen-list{
+            background-color: white;
+            .truyen{
+                .story-img{
+                    max-width: 100px;
+                    max-height: 100px;
+                }
+                .story-tieude{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-weight: bold;
                 }
             }
         }
@@ -67,14 +84,16 @@
 
 .toplist-sidebar {
     width: 100%;
-    height: 400px;
-    background-color: blue;
+    max-height: 400px;
+    background-color: white;
+    padding: 7px 10px
 }
 
 .newlist-sidebar {
     width: 100%;
-    height: 400px;
-    background-color: red;
+    max-height: 400px;
+    background-color: white;
+    padding: 7px 10px;
 }
 
 .binhluan-sidebar {

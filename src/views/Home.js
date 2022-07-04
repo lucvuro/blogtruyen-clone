@@ -2,6 +2,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useState } from 'react'
 import './Home.scss'
 import BannerComponent from "../components/BannerComponent";
+import TruyenHayComponent from "../components/TruyenHayComponent";
+import TruyenMoiDangComponent from "../components/TruyenMoiDangComponent";
 const Home = () => {
     const [isListType, setListType] = useState(true)
     return (
@@ -61,7 +63,7 @@ const Home = () => {
                                 <i class="fa-solid fa-border-all"></i>
                             </span>
                         </div>
-                        <div className="listtruyen mt-3">
+                        {isListType && <div className="listtruyen mt-3">
                             <div className="listtruyen-list">
                                 <div className="truyen">
                                     <Container>
@@ -97,7 +99,7 @@ const Home = () => {
                                                     </Row>
                                                     <Row className="mt-3">
                                                         <Col md="12">
-                                                        Action Adventure Manhwa Shounen Fantasy
+                                                            Action Adventure Manhwa Shounen Fantasy
                                                         </Col>
                                                     </Row>
                                                 </Container>
@@ -109,17 +111,44 @@ const Home = () => {
                             <div classname="listtruyen-grid">
 
                             </div>
-                        </div>
+                        </div>}
+                        {!isListType && <div className="grid-truyen mt-3">
+                            <div className="gridtruyen-list">
+                                <Container>
+                                    <Row>
+                                        <Col md="6">
+                                            <div className="truyen mt-3">
+                                                <Row>
+                                                    <Col md="3">
+                                                        <img className="img-thumbnail story-img" src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg" />
+                                                    </Col>
+                                                    <Col md="9">
+                                                        <div className="story-tieude">
+                                                            DETECTIVE CONAN
+                                                        </div>
+                                                        <div>Thoi gian</div>
+                                                        <div>Luot xem</div>
+                                                        <div>1 chuong - 0 binh luan</div>
+                                                    </Col>
+                                                </Row>
+                                            </div>
+                                        </Col>
+                                        
+                                    </Row>
+                                </Container>
+                            </div>
+                        </div>}
+
                     </div>
                 </Col>
                 <Col className="mt-3" md="4">
                     <div className="toplist-sidebar">
-
+                        <TruyenHayComponent/>
                     </div>
-                    <div className="newlist-sidebar">
-
+                    <div className="newlist-sidebar mt-3">
+                        <TruyenMoiDangComponent/>
                     </div>
-                    <div className="binhluan-sidebar">
+                    <div className="binhluan-sidebar mt-3">
 
                     </div>
                 </Col>

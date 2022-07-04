@@ -1,0 +1,57 @@
+.sidebar-tieude {
+    background-color: #ff7f50;
+    height: 30px;
+    border: 1px solid black;
+    .tieude {
+        margin: 3px 5px;
+
+    }
+
+    .icon {
+        margin: 3px 5px;
+        cursor: pointer;
+    }
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px 3px;
+    border-bottom: 1px solid black;
+
+    .top-item {
+        font-weight: bold;
+        cursor: pointer;
+        color: gray;
+    }
+
+    .active {
+        color: green
+    }
+}
+
+.top-content {
+    margin: 3px 3px;
+
+    .item {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 12px;
+        .index{
+            font-weight: bold;
+            margin: 3px 3px;
+        }
+        .name{
+            margin: 3px 3px;
+            width: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .views{
+            white-space: nowrap;
+            margin: 3px 3px;
+        }
+    }
+}
