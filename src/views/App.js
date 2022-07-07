@@ -1,6 +1,8 @@
 import './App.css';
 import NavBar from './NavBar';
 import Home from './Home';
+import TruyenPage from './TruyenPage';
+import TheLoaiPage from './TheLoaiPage';
 import ThemeProvider from 'react-bootstrap/esm/ThemeProvider';
 import React from "react";
 import {
@@ -17,8 +19,14 @@ function App() {
           <NavBar />
         </header>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/truyen">
+            <TruyenPage/>
+          </Route>
+          <Route path="/theloai">
+            <TheLoaiPage/>
           </Route>
         </Switch>
       </Router>

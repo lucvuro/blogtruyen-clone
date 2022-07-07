@@ -11,16 +11,19 @@ const TruyenMoiDangComponent = () => {
             </div>
             {showsideBar && <div className="sidebar-new-content mt-3">
                 <Row>
-                    <Col md="4">
+                    <Col md="4" xs="3">
                         <img className="img-thumbnail image-truyen" src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg" />
                     </Col>
-                    <Col md="4">
+                    <Col md="4" xs="3">
                         <img className="img-thumbnail image-truyen" src="https://i7.xem-truyen.com/manga/30/30600/601f31b5-154a-4fd1-adf0-8c068795f0d5.thumb_500x.png" />
                     </Col>
-                    <Col md="4">
+                    <Col md="4" xs="3">
                         <img className="img-thumbnail image-truyen" src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg" />
                     </Col>
-                    <Col md="4">
+                    <Col md="4" xs="3">
+                        <img className="img-thumbnail image-truyen" src="https://i7.xem-truyen.com/manga/30/30605/004.thumb_500x.jpg" />
+                    </Col>
+                    <Col md="4" xs="3">
                         <img className="img-thumbnail image-truyen" src="https://i7.xem-truyen.com/manga/30/30605/004.thumb_500x.jpg" />
                     </Col>
                 </Row>
