@@ -4,6 +4,7 @@ import './Home.scss'
 import BannerComponent from "../components/BannerComponent";
 import TruyenHayComponent from "../components/TruyenHayComponent";
 import TruyenMoiDangComponent from "../components/TruyenMoiDangComponent";
+import SideBarComponent from "../components/SideBarComponent";
 const Home = () => {
     const [isListType, setListType] = useState(true)
     return (
@@ -142,15 +143,7 @@ const Home = () => {
                     </div>
                 </Col>
                 <Col className="mt-3" md="4">
-                    <div className="toplist-sidebar">
-                        <TruyenHayComponent/>
-                    </div>
-                    <div className="newlist-sidebar mt-3">
-                        <TruyenMoiDangComponent/>
-                    </div>
-                    <div className="binhluan-sidebar mt-3">
-
-                    </div>
+                    <SideBarComponent/>
                 </Col>
             </Row>
         </Container>
