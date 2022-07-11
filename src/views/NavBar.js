@@ -1,5 +1,6 @@
 import { queryAllByAltText } from "@testing-library/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import { useSelector } from "react-redux";
 import {
   Container,
   Row,
@@ -11,17 +12,22 @@ import {
   FormControl,
   Button,
   NavDropdown,
-  Modal
+  Modal,
 } from "react-bootstrap";
+import LoginComponent from "../components/LoginComponent";
+import RegisterComponent from "../components/RegisterComponent";
 import "./Nav.scss";
-const NavBar = () => {
-  const [show,setShow] = useState(false)
+const NavBar = (props) => {
+  const users = useSelector(state => state.users)
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister,setShowRegister] = useState(false)
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionIsActive, setsuggestionIsActive] = useState(false);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
   const [value, setValue] = useState("");
 
-  const handleCloseModal = () => setShow(false)
+  const handleCloseLogin = () => setShowLogin(false);
+  const handleCloseRegister = () => setShowRegister(false);
   const handleOnChange = (e) => {
     setValue(e.target.value);
   };
@@ -39,25 +45,37 @@ const NavBar = () => {
   }, [value]);
   return (
     <>
-     <Modal
-      show={show}
-      onHide={handleCloseModal}
-      >
+    {console.log('re-render:',users)}
+      {/*Login modal */}
+      <Modal show={showLogin} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
-          <Modal.Title>ĐĂNG NHẬP</Modal.Title>
+          <Modal.Title>TRUYENCC.VN</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Tên đăng nhập
+          <LoginComponent/>
         </Modal.Body>
       </Modal>
-      <Navbar fixed="top" collapseOnSelect expand="lg">
+      {/*Login modal */}
+
+      {/*Register modal */}
+      <Modal show={showRegister} onHide={handleCloseRegister}>
+        <Modal.Header closeButton>
+          <Modal.Title>TRUYENCC.VN</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <RegisterComponent/>
+        </Modal.Body>
+      </Modal>
+      {/*register modal */}
+
+      {users === null && <Navbar fixed="top" collapseOnSelect expand="lg">
         <Container fluid="sm">
           <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav>
-              <Nav.Link onClick={() => setShow(!show)} >Đăng nhập</Nav.Link>
-              <Nav.Link href="/">Đăng ký</Nav.Link>
+              <Nav.Link onClick={() => setShowLogin(true)}>Đăng nhập</Nav.Link>
+              <Nav.Link onClick={() => setShowRegister(true)}>Đăng ký</Nav.Link>
               <Nav.Link href="/">List truyện</Nav.Link>
               <NavDropdown title="Liên hệ">
                 <NavDropdown.Item href="/">Liên hệ quảng cáo</NavDropdown.Item>
@@ -89,9 +107,48 @@ const NavBar = () => {
             )}
           </Nav>
         </Container>
-      </Navbar>
+      </Navbar>}
 
-     
+      {users !== null && <Navbar fixed="top" collapseOnSelect expand="lg">
+        <Container fluid="sm">
+          <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav>
+              {/* <Nav.Link onClick={() => setShowLogin(true)}>Đăng nhập</Nav.Link>
+              <Nav.Link onClick={() => setShowRegister(true)}>Đăng ký</Nav.Link> */}
+              <Nav.Link href="/">List truyện</Nav.Link>
+              <NavDropdown title="Liên hệ">
+                <NavDropdown.Item href="/">Liên hệ quảng cáo</NavDropdown.Item>
+                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+          <Nav>
+            <InputGroup size="sm">
+              <FormControl
+                placeholder="Nhập tên truyện..."
+                aria-label="Nhập tên truyện..."
+                aria-describedby="input_timkiem"
+                value={value}
+                onChange={(e) => handleOnChange(e)}
+              />
+              <Button className="ml-3">Tìm</Button>
+            </InputGroup>
+            {suggestionIsActive && (
+              <div className="autocomplete">
+                {suggestions.map((item, index) => {
+                  return (
+                    <div className="autocomplete-item" key={index}>
+                      {item.name}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </Nav>
+        </Container>
+      </Navbar>}
     </>
   );
 };

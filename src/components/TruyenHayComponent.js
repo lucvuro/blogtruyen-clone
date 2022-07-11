@@ -8,7 +8,7 @@ const TruyenHayComponent = () => {
         <>
             <div className="sidebar-tieude">
                 <span className="tieude">Truyện hay</span>
-                <span className='pull-right icon' onClick={() => setshowsideBar(!showsideBar)}><i class={showsideBar ? "fa-solid fa-minus" : "fa-solid fa-plus"}></i></span>
+                <span className='pull-right icon' onClick={() => setshowsideBar(!showsideBar)}><i className={showsideBar ? "fa-solid fa-minus" : "fa-solid fa-plus"}></i></span>
             </div>
             {showsideBar && <div className="sidebar-content">
                 <div className="top">

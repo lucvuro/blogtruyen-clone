@@ -11,7 +11,7 @@ const TheLoaiPage = () => {
         <Row>
           <BannerComponent />
         </Row>
-        <Row class="mt-5">
+        <Row className="mt-5">
           <Col className="mt-3" md="8">
             <div className="theloai-container">
               <div className="theloai-container-tieude">

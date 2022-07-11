@@ -12,7 +12,7 @@ const TruyenPage = () => {
             <Row>
                 <BannerComponent />
             </Row>
-            <Row class="mt-5">
+            <Row className="mt-5">
                 <Col className="mt-3" md="8">
                     <div className="truyen-info">
                         <Row>
@@ -79,7 +79,7 @@ const TruyenPage = () => {
                                 <div className="list-chapters">
                                     <div className="title">
                                         TỔNG HỢP (313 CHƯƠNG)
-                                        <span className="pull-right icon" onClick={() => setisSorted(!isSorted)}><i class={isSorted ? "fa-solid fa-arrow-down-a-z" : "fa-solid fa-arrow-up-a-z"}></i></span>
+                                        <span className="pull-right icon" onClick={() => setisSorted(!isSorted)}><i className={isSorted ? "fa-solid fa-arrow-down-a-z" : "fa-solid fa-arrow-up-a-z"}></i></span>
                                     </div>
                                     <div className="chapters">
                                         <Row style={{ padding: "5px 0" }}>

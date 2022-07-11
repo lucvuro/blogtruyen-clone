@@ -7,7 +7,7 @@ const TruyenMoiDangComponent = () => {
         <>
             <div className="sidebar-new-tieude" style={{ backgroundColor: "#0f0" }}>
                 <span className="tieude">Truyện mới đăng</span>
-                <span className='pull-right icon' onClick={() => setshowsideBar(!showsideBar)}><i class={showsideBar ? "fa-solid fa-minus" : "fa-solid fa-plus"}></i></span>
+                <span className='pull-right icon' onClick={() => setshowsideBar(!showsideBar)}><i className={showsideBar ? "fa-solid fa-minus" : "fa-solid fa-plus"}></i></span>
             </div>
             {showsideBar && <div className="sidebar-new-content mt-3">
                 <Row>

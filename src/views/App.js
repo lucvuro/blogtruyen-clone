@@ -3,8 +3,7 @@ import NavBar from './NavBar';
 import Home from './Home';
 import TruyenPage from './TruyenPage';
 import TheLoaiPage from './TheLoaiPage';
-import ThemeProvider from 'react-bootstrap/esm/ThemeProvider';
-import React from "react";
+import {useState,useSelector} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,7 +15,7 @@ function App() {
     <>
       <Router>
         <header className="header">
-          <NavBar />
+          <NavBar/>
         </header>
         <Switch>
           <Route exact path="/">

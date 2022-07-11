@@ -56,12 +56,12 @@ const Home = () => {
                             <span className={isListType ? "pull-right icon active" : "pull-right icon"}
                                 style={{ margin: "7px" }}
                                 onClick={() => setListType(true)}>
-                                <i class="fa-solid fa-list"></i>
+                                <i className="fa-solid fa-list"></i>
                             </span>
                             <span className={isListType ? "pull-right icon" : "pull-right icon active"}
                                 style={{ margin: "7px" }}
                                 onClick={() => setListType(false)}>
-                                <i class="fa-solid fa-border-all"></i>
+                                <i className="fa-solid fa-border-all"></i>
                             </span>
                         </div>
                         {isListType && <div className="listtruyen mt-3">
@@ -109,7 +109,7 @@ const Home = () => {
                                     </Container>
                                 </div>
                             </div>
-                            <div classname="listtruyen-grid">
+                            <div className="listtruyen-grid">
 
                             </div>
                         </div>}
