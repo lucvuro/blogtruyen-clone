@@ -1,13 +1,31 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button ,Alert} from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { registerUser } from "../api/authAPI";
+import { useDispatch, useSelector } from "react-redux";
+import { createAxios } from "../api/axiosClient";
 const RegisterComponent = () => {
+  const user = useSelector((state) => state.auth.login?.currentUser)
+  const dispatch = useDispatch();
+  const axiosClient = createAxios(user,dispatch)
+  const registerError = useSelector((state) => state.auth.register.error);
+  const registerErrorCode = useSelector(
+    (state) => state.auth.register.errorCode
+  );
+  const successRegister = useSelector((state) => state.auth.register.isSuccess)
   const schema = yup.object().shape({
     username: yup.string().required("Vui lòng nhập tài khoản"),
-    password: yup.string().max(16,"Mật khẩu chỉ nằm trong từ 8 - 16 ký tự").min(8,"Mật khẩu quá ngắn").required("Vui lòng nhập mẩu khẩu"),
-    confirmpassword: yup.string().required("Vui lòng xác nhận mật khẩu").oneOf([yup.ref("password"),null],"Mật khẩu không trùng khớp")
+    password: yup
+      .string()
+      .max(16, "Mật khẩu chỉ nằm trong từ 8 - 16 ký tự")
+      .min(8, "Mật khẩu quá ngắn")
+      .required("Vui lòng nhập mẩu khẩu"),
+    confirmpassword: yup
+      .string()
+      .required("Vui lòng xác nhận mật khẩu")
+      .oneOf([yup.ref("password"), null], "Mật khẩu không trùng khớp"),
   });
   const {
     register,
@@ -16,17 +34,37 @@ const RegisterComponent = () => {
     control,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    await registerUser(data, dispatch);
+  };
+  const showErrorContent = () => {
+    switch(registerErrorCode){
+      case 409:
+        return "Tài khoản đã tồn tại"
+      default:
+        return "Đăng ký không thành công"
+    }
+  }
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        {registerError && !successRegister &&(
+          <Alert variant="danger">
+            {showErrorContent()}
+          </Alert>
+        )}
+        {!registerError && successRegister &&(
+          <Alert variant="success">
+            Đăng ký thành công
+          </Alert>
+        )}
         <Form.Group className="mb-3" controlId="formUser">
           <Form.Label>Tài khoản</Form.Label>
           <Form.Control
             type="text"
             {...register("username")}
             isInvalid={errors.username}
-            autoComplete = "off"
+            autoComplete="off"
           />
           {errors.username && (
             <Form.Control.Feedback type="invalid">
@@ -41,7 +79,7 @@ const RegisterComponent = () => {
             type="password"
             {...register("password")}
             isInvalid={errors.password}
-            autoComplete = "off"
+            autoComplete="off"
           />
           {errors.password && (
             <Form.Control.Feedback type="invalid">
@@ -55,7 +93,7 @@ const RegisterComponent = () => {
             type="password"
             {...register("confirmpassword")}
             isInvalid={errors.confirmpassword}
-            autoComplete = "off"
+            autoComplete="off"
           />
           {errors.confirmpassword && (
             <Form.Control.Feedback type="invalid">

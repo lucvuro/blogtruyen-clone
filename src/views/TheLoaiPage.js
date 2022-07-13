@@ -4,9 +4,13 @@ import SideBarComponent from "../components/SideBarComponent";
 import TruyenHayComponent from "../components/TruyenHayComponent";
 import TruyenMoiDangComponent from "../components/TruyenMoiDangComponent";
 import "./TheLoaiPage.scss";
+import NavBar from "./NavBar";
 const TheLoaiPage = () => {
   return (
     <>
+    <header className="header">
+          <NavBar />
+        </header>
       <Container className="homepage">
         <Row>
           <BannerComponent />

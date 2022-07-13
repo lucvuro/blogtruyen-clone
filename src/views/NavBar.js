@@ -1,5 +1,5 @@
 import { queryAllByAltText } from "@testing-library/react";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   Container,
@@ -17,10 +17,11 @@ import {
 import LoginComponent from "../components/LoginComponent";
 import RegisterComponent from "../components/RegisterComponent";
 import "./Nav.scss";
+import { NavLink } from "react-router-dom";
 const NavBar = (props) => {
-  const users = useSelector(state => state.users)
+  const users = useSelector((state) => state.auth.login.currentUser);
   const [showLogin, setShowLogin] = useState(false);
-  const [showRegister,setShowRegister] = useState(false)
+  const [showRegister, setShowRegister] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [suggestionIsActive, setsuggestionIsActive] = useState(false);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
@@ -45,14 +46,13 @@ const NavBar = (props) => {
   }, [value]);
   return (
     <>
-    {console.log('re-render:',users)}
       {/*Login modal */}
       <Modal show={showLogin} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
           <Modal.Title>TRUYENCC.VN</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <LoginComponent/>
+          <LoginComponent setShow={setShowLogin} />
         </Modal.Body>
       </Modal>
       {/*Login modal */}
@@ -63,92 +63,116 @@ const NavBar = (props) => {
           <Modal.Title>TRUYENCC.VN</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <RegisterComponent/>
+          <RegisterComponent />
         </Modal.Body>
       </Modal>
       {/*register modal */}
 
-      {users === null && <Navbar fixed="top" collapseOnSelect expand="lg">
-        <Container fluid="sm">
-          <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
+      {users === null && (
+        <Navbar fixed="top" collapseOnSelect expand="lg">
+          <Container fluid="sm">
+            <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav>
+                <Nav.Link onClick={() => setShowLogin(true)}>
+                  Đăng nhập
+                </Nav.Link>
+                <Nav.Link onClick={() => setShowRegister(true)}>
+                  Đăng ký
+                </Nav.Link>
+                <Nav.Link href="/">List truyện</Nav.Link>
+                <NavDropdown title="Liên hệ">
+                  <NavDropdown.Item href="/">
+                    Liên hệ quảng cáo
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
             <Nav>
-              <Nav.Link onClick={() => setShowLogin(true)}>Đăng nhập</Nav.Link>
-              <Nav.Link onClick={() => setShowRegister(true)}>Đăng ký</Nav.Link>
-              <Nav.Link href="/">List truyện</Nav.Link>
-              <NavDropdown title="Liên hệ">
-                <NavDropdown.Item href="/">Liên hệ quảng cáo</NavDropdown.Item>
-                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
-              </NavDropdown>
+              <InputGroup size="sm">
+                <FormControl
+                  placeholder="Nhập tên truyện..."
+                  aria-label="Nhập tên truyện..."
+                  aria-describedby="input_timkiem"
+                  value={value}
+                  onChange={(e) => handleOnChange(e)}
+                />
+                <Button className="ml-3">Tìm</Button>
+              </InputGroup>
+              {suggestionIsActive && (
+                <div className="autocomplete">
+                  {suggestions.map((item, index) => {
+                    return (
+                      <div className="autocomplete-item" key={index}>
+                        {item.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </Nav>
-          </Navbar.Collapse>
-          <Nav>
-            <InputGroup size="sm">
-              <FormControl
-                placeholder="Nhập tên truyện..."
-                aria-label="Nhập tên truyện..."
-                aria-describedby="input_timkiem"
-                value={value}
-                onChange={(e) => handleOnChange(e)}
-              />
-              <Button className="ml-3">Tìm</Button>
-            </InputGroup>
-            {suggestionIsActive && (
-              <div className="autocomplete">
-                {suggestions.map((item, index) => {
-                  return (
-                    <div className="autocomplete-item" key={index}>
-                      {item.name}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </Nav>
-        </Container>
-      </Navbar>}
+          </Container>
+        </Navbar>
+      )}
 
-      {users !== null && <Navbar fixed="top" collapseOnSelect expand="lg">
-        <Container fluid="sm">
-          <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav>
-              {/* <Nav.Link onClick={() => setShowLogin(true)}>Đăng nhập</Nav.Link>
+      {users !== null && (
+        <Navbar fixed="top" collapseOnSelect expand="lg">
+          <Container fluid="sm">
+            <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav>
+                {/* <Nav.Link onClick={() => setShowLogin(true)}>Đăng nhập</Nav.Link>
               <Nav.Link onClick={() => setShowRegister(true)}>Đăng ký</Nav.Link> */}
-              <Nav.Link href="/">List truyện</Nav.Link>
-              <NavDropdown title="Liên hệ">
-                <NavDropdown.Item href="/">Liên hệ quảng cáo</NavDropdown.Item>
-                <NavDropdown.Item href="/">RSS</NavDropdown.Item>
-              </NavDropdown>
+                <Nav.Item>
+                  <i className="fa-solid fa-message icon-navbar"></i>
+                </Nav.Item>
+                <Nav.Item>
+                  <i className="fa-solid fa-heart icon-navbar"></i>
+                </Nav.Item>
+                <NavLink to="/dashboard">
+                  <Nav.Item>
+                    <span style={{ marginLeft: "8px" }}>{users?.username}</span>
+                  </Nav.Item>
+                </NavLink>
+
+                <Nav.Link href="/">List truyện</Nav.Link>
+                <NavDropdown title="Liên hệ">
+                  <NavDropdown.Item href="/">
+                    Liên hệ quảng cáo
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/">RSS</NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+            <Nav>
+              <InputGroup size="sm">
+                <FormControl
+                  placeholder="Nhập tên truyện..."
+                  aria-label="Nhập tên truyện..."
+                  aria-describedby="input_timkiem"
+                  value={value}
+                  onChange={(e) => handleOnChange(e)}
+                />
+                <Button className="ml-3">Tìm</Button>
+              </InputGroup>
+              {suggestionIsActive && (
+                <div className="autocomplete">
+                  {suggestions.map((item, index) => {
+                    return (
+                      <div className="autocomplete-item" key={index}>
+                        {item.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </Nav>
-          </Navbar.Collapse>
-          <Nav>
-            <InputGroup size="sm">
-              <FormControl
-                placeholder="Nhập tên truyện..."
-                aria-label="Nhập tên truyện..."
-                aria-describedby="input_timkiem"
-                value={value}
-                onChange={(e) => handleOnChange(e)}
-              />
-              <Button className="ml-3">Tìm</Button>
-            </InputGroup>
-            {suggestionIsActive && (
-              <div className="autocomplete">
-                {suggestions.map((item, index) => {
-                  return (
-                    <div className="autocomplete-item" key={index}>
-                      {item.name}
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </Nav>
-        </Container>
-      </Navbar>}
+          </Container>
+        </Navbar>
+      )}
     </>
   );
 };

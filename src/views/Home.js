@@ -5,9 +5,14 @@ import BannerComponent from "../components/BannerComponent";
 import TruyenHayComponent from "../components/TruyenHayComponent";
 import TruyenMoiDangComponent from "../components/TruyenMoiDangComponent";
 import SideBarComponent from "../components/SideBarComponent";
+import NavBar from "./NavBar";
 const Home = () => {
     const [isListType, setListType] = useState(true)
     return (
+        <>
+        <header className="header">
+          <NavBar />
+        </header>
         <Container className="homepage">
             <Row>
                 <BannerComponent />
@@ -147,6 +152,7 @@ const Home = () => {
                 </Col>
             </Row>
         </Container>
+        </>
     )
 }
 export default Home

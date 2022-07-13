@@ -1,13 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button, Spinner, Alert } from "react-bootstrap";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
-import { setUser } from "../slices/userSlice";
+import { loginUser } from "../api/authAPI";
+import { useEffect } from "react";
+import {createAxios} from "../api/axiosClient";
 const LoginComponent = (props) => {
-  const { setToken } = props;
-  const dispatch = useDispatch()
+  const user = useSelector(state => state.auth.login?.currentUser)
+  const { setToken, setShow } = props;
+  const authErr = useSelector((state) => state.auth.login.error);
+  const dispatch = useDispatch();
+  const axiosClient = createAxios(user,dispatch)
   const schema = yup.object().shape({
     username: yup.string().required("Vui lòng nhập tài khoản"),
     password: yup.string().required("Vui lòng nhập mẩu khẩu"),
@@ -20,21 +24,17 @@ const LoginComponent = (props) => {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = async (data) => {
-      const url = `https://reqres.in/api/login`
-      let res = await axios.post(url,{
-        email: data.username,
-        password: data.password
-      })
-      const action = setUser({
-        token: res.data.token
-      })
-      dispatch(action)
-      localStorage.setItem('user',JSON.stringify(res.data))
-      
+    const success = await loginUser(data, dispatch,axiosClient);
+    if (success) {
+      setShow(false)
+    }
   };
   return (
     <div>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        {authErr && <Alert variant="danger">
+          Tài khoản hoặc mật khẩu không đúng
+        </Alert>}
         <Form.Group className="mb-3" controlId="formUser">
           <Form.Label>Tài khoản</Form.Label>
           <Form.Control

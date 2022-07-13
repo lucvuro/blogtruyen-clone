@@ -1,0 +1,20 @@
+.profile-container{
+    background-color: white;
+    height: 400px;
+    .avatar{
+        text-align: center;
+        padding: 10px 0px;
+        .image{
+            width: 150px;
+            height:150px;
+        }
+    }
+    .info{
+        display: flex;
+        flex-direction: column;
+        .item{
+            font-size: 24px;
+            padding: 4px 0;
+        }
+    }
+}
