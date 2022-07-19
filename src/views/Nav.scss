@@ -9,6 +9,12 @@
         color: #fff !important;
         margin: 3px 0 0 0;
         display: inline-block;
+        a{
+            color: #FFF
+        }
+        .active{
+            background: none;
+        }
     }
     .navbar-nav{
         padding-left: 40px !important;

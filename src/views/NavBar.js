@@ -71,7 +71,7 @@ const NavBar = (props) => {
       {users === null && (
         <Navbar fixed="top" collapseOnSelect expand="lg">
           <Container fluid="sm">
-            <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
+            <Navbar.Brand><NavLink to="/">TRUYENCC.VN</NavLink></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav>
@@ -120,7 +120,7 @@ const NavBar = (props) => {
       {users !== null && (
         <Navbar fixed="top" collapseOnSelect expand="lg">
           <Container fluid="sm">
-            <Navbar.Brand>TRUYENCC.VN</Navbar.Brand>
+          <Navbar.Brand><NavLink to="/">TRUYENCC.VN</NavLink></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav>
@@ -132,12 +132,11 @@ const NavBar = (props) => {
                 <Nav.Item>
                   <i className="fa-solid fa-heart icon-navbar"></i>
                 </Nav.Item>
-                <NavLink to="/dashboard">
-                  <Nav.Item>
-                    <span style={{ marginLeft: "8px" }}>{users?.username}</span>
-                  </Nav.Item>
-                </NavLink>
-
+                <Nav.Item className="nav-link">
+                  <NavLink to="/dashboard">
+                    <span style={{ marginLeft: "8px",color: "#FFF" }}>{users?.username}</span>
+                  </NavLink>
+                </Nav.Item>
                 <Nav.Link href="/">List truyện</Nav.Link>
                 <NavDropdown title="Liên hệ">
                   <NavDropdown.Item href="/">

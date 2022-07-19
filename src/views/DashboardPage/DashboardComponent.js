@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import "./Dashboard.scss";
+import "./scss/Dashboard.scss";
 import { useDispatch } from "react-redux";
 import HomeComponent from "./HomeComponent";
 import ProfileComponent from "./ProfileComponent";
 import { BrowserRouter, Switch, Route, NavLink, Link } from "react-router-dom";
 import { logoutUser } from "../../api/authAPI";
 import { createAxios } from "../../api/axiosClient";
+import AddMangaPage from "./AddMangaPage";
 const DashboardComponent = (props) => {
   const dispatch = useDispatch();
   const { user, path, url } = props;
@@ -116,6 +117,9 @@ const DashboardComponent = (props) => {
                 </Route>
                 <Route path={`${path}/profile`}>
                   <ProfileComponent user={user} />
+                </Route>
+                <Route path={`${path}/themtruyen`}>
+                  <AddMangaPage user={user}/>
                 </Route>
               </Switch>
             </div>

@@ -3,7 +3,7 @@ import Home from "./Home";
 import TruyenPage from "./TruyenPage";
 import TheLoaiPage from "./TheLoaiPage";
 import { useState, useSelector } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";  
 import DashboardPage from "./DashboardPage/DashboardPage";
 function App() {
   return (

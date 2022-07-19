@@ -1,0 +1,14 @@
+.fields {
+    &__info{
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        justify-content: center;
+    }
+    &__inputs{
+        width: 80%;
+    }
+    &__label{
+        width: 20%;
+    }
+}

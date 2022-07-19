@@ -1,5 +1,4 @@
 import { Container, Col, Row, Button } from "react-bootstrap";
-import "./ProfileComponent.scss";
 const ProfileComponent = (props) => {
   const { user } = props;
   return (
