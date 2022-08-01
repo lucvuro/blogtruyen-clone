@@ -11,4 +11,15 @@
     &__label{
         width: 20%;
     }
+    &__text{
+        font-size: 0.875em;
+    }
+    &__list{
+        width: 86%;
+    }
+
+
+    &__text--danger{
+        color: #dc3545;
+    }
 }

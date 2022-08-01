@@ -1,12 +1,14 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import Select from "react-select";
+import { useHistory } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const AddMangaComponent = (props) => {
-  const { user } = props;
+  const { user, handleonSubmit, path } = props;
+  const history = useHistory();
   const yupSchema = yup.object().shape({
     name: yup.string().required("Vui lòng nhập tên truyện"),
     fileImage: yup
@@ -20,11 +22,17 @@ const AddMangaComponent = (props) => {
     authors: yup.mixed().required("Vui lòng chọn tác giả"),
     sources: yup.mixed().required("Vui lòng chọn nhóm dịch, nguồn"),
     categories: yup.mixed().required("Vui lòng chọn thể loại truyện"),
-    sumary: yup.string().required("Vui lòng nhập nội dung truyện")
+    sumary: yup.string().required("Vui lòng nhập nội dung truyện"),
+    status: yup.mixed().required("Vui lòng nhập tình trạng"),
   });
 
-  const [contentEditor, setContentEditor] = useState();
-  const { register, handleSubmit, control } = useForm({
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm({
     resolver: yupResolver(yupSchema),
   });
   const customStyles = {
@@ -40,8 +48,9 @@ const AddMangaComponent = (props) => {
     },
     { value: "Huu", label: "To Huu" },
   ];
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    await handleonSubmit(data);
+    history.push(`${path}`);
   };
   return (
     <div className="container">
@@ -53,23 +62,42 @@ const AddMangaComponent = (props) => {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <div className="fields">
               <div className="fields__info">
-                <span className="fields__label">Tên truyện: </span>
+                <span className="fields__label">
+                  Tên truyện<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
                   <Form.Control
                     type="text"
                     placeholder="Nhập tên truyện"
                     {...register("name")}
+                    isInvalid={errors.name}
                   />
+                  {errors.name && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.name.message}
+                    </Form.Control.Feedback>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Image: </span>
+                <span className="fields__label">
+                  Image<sup style={{ color: "red" }}>*</sup>
+                </span>
                 <span className="fields__inputs">
-                  <Form.Control type="file" {...register("fileImage")} />
+                  <Form.Control
+                    type="file"
+                    isInvalid={errors.fileImage}
+                    {...register("fileImage")}
+                  />
+                  {errors.fileImage && (
+                    <Form.Control.Feedback type="invalid">
+                      {errors.fileImage.message}
+                    </Form.Control.Feedback>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Tên khác: </span>
+                <span className="fields__label">Tên khác </span>
                 <span className="fields__inputs">
                   <Form.Control
                     type="text"
@@ -79,7 +107,9 @@ const AddMangaComponent = (props) => {
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Tác giả: </span>
+                <span className="fields__label">
+                  Tác giả<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
                   <Controller
                     name="authors"
@@ -95,10 +125,17 @@ const AddMangaComponent = (props) => {
                       />
                     )}
                   />
+                  {errors.authors && (
+                    <span className="fields__text fields__text--danger">
+                      {errors.authors.message}
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Nguồn: </span>
+                <span className="fields__label">
+                  Nguồn<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
                   <Controller
                     name="sources"
@@ -114,10 +151,17 @@ const AddMangaComponent = (props) => {
                       />
                     )}
                   />
+                  {errors.sources && (
+                    <span className="fields__text fields__text--danger">
+                      {errors.sources.message}
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Thể loại: </span>
+                <span className="fields__label">
+                  Thể loại<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
                   <Controller
                     name="categories"
@@ -133,15 +177,22 @@ const AddMangaComponent = (props) => {
                       />
                     )}
                   />
+                  {errors.categories && (
+                    <span className="fields__text fields__text--danger">
+                      {errors.categories.message}
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Nội dung: </span>
+                <span className="fields__label">
+                  Nội dung<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
                   <Controller
                     name="sumary"
                     control={control}
-                    render={({ field: { value, onChange,ref } }) => (
+                    render={({ field: { value, onChange } }) => (
                       <Editor
                         tinymceScriptSrc={`${process.env.REACT_APP_PUBLIC_URL}/tinymce/tinymce.min.js`}
                         init={{
@@ -151,25 +202,46 @@ const AddMangaComponent = (props) => {
                         }}
                         value={value}
                         onEditorChange={onChange}
-                        ref={ref}
                       />
                     )}
                   />
+                  {errors.sumary && (
+                    <span className="fields__text fields__text--danger">
+                      {errors.sumary.message}
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <span className="fields__label">Trạng thái: </span>
+                <span className="fields__label">
+                  Tình trạng<sup style={{ color: "red" }}>*</sup>{" "}
+                </span>
                 <span className="fields__inputs">
-                  <Select
+                  <Controller
                     name="status"
-                    options={list}
-                    menuPosition={"fixed"}
-                    styles={customStyles}
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        options={list}
+                        menuPosition={"fixed"}
+                        styles={customStyles}
+                        placeholder="Chọn tình trạng..."
+                      />
+                    )}
                   />
+                  {errors.status && (
+                    <span className="fields__text fields__text--danger">
+                      {errors.status.message}
+                    </span>
+                  )}
                 </span>
               </div>
               <div className="fields__info">
-                <Button variant="success" type="submit">
+                <Button variant="success" type="submit" disabled={isSubmitting}>
+                  {isSubmitting && (
+                    <Spinner animation="border" size="sm"></Spinner>
+                  )}
                   Thêm
                 </Button>
               </div>
