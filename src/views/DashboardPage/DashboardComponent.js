@@ -43,14 +43,14 @@ const DashboardComponent = (props) => {
             <NavLink to={`${url}/themtruyen`} className="dashboard-nav-item">
               <i className="fa-solid fa-file-pen"></i> Thêm mới truyện{" "}
             </NavLink>
-            <NavLink to={`${url}/themtruyen`} className="dashboard-nav-item">
-              <i className="fa-solid fa-file-pen"></i> Thêm tác giả{" "}
+            <NavLink to={`${url}/tacgia`} className="dashboard-nav-item">
+              <i className="fa-solid fa-file-pen"></i> Danh sách tác giả{" "}
             </NavLink>
-            <NavLink to={`${url}/themtruyen`} className="dashboard-nav-item">
-              <i className="fa-solid fa-file-pen"></i> Thêm thể loại{" "}
+            <NavLink to={`${url}/theloai`} className="dashboard-nav-item">
+              <i className="fa-solid fa-file-pen"></i> Danh sách thể loại{" "}
             </NavLink>
-            <NavLink to={`${url}/themtruyen`} className="dashboard-nav-item">
-              <i className="fa-solid fa-file-pen"></i> Thêm nhóm dịch{" "}
+            <NavLink to={`${url}/nhomdich`} className="dashboard-nav-item">
+              <i className="fa-solid fa-file-pen"></i> Danh sách nhóm dịch{" "}
             </NavLink>
             <div
               className={

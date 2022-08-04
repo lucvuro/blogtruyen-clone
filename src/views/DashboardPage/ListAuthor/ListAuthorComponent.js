@@ -1,4 +1,4 @@
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Table } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const ListAuthorComponent = (props) => {
@@ -32,22 +32,22 @@ const ListAuthorComponent = (props) => {
               </div>
               <div className="fields__info">
                 <div className="fields__list">
-                  <table class="table">
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Tên tác giả</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       <tr>
-                        <td>Tac gia 1</td>
-                        <td>Otto</td>
-                      </tr>
-                      <tr>
-                        <td>Jacob Jacob Jacob Jacob Jacob Jacob </td>
-                        <td>Thornton</td>
-                      </tr>
-                      <tr>
-                        <td>Larry</td>
-                        <td>the Bird</td>
+                        <td>1</td>
+                        <td>Mark</td>
+                        <td><Button variant="danger">Xóa</Button></td>
+                        <td><Button variant="success">Sửa</Button></td>
                       </tr>
                     </tbody>
-                  </table>
+                  </Table>
                 </div>
               </div>
             </div>
