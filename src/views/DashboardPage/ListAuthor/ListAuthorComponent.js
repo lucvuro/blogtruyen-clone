@@ -1,15 +1,38 @@
-import { Form, Button,Table } from "react-bootstrap";
+import { useEffect, useContext, useState } from "react";
+import { Form, Button, Table, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const ListAuthorComponent = (props) => {
-  const { user } = props;
+  const { user, listAuthors } = props;
+  const [showAddModal, setShowAddModal] = useState(false);
+  const handleCloseAddModal = () => setShowAddModal(false);
   const {
     register,
     control,
     formState: { errors },
   } = useForm();
+  const handleDelete = (item) => {
+    console.log(item);
+  };
   return (
     <>
+      {/*Login modal */}
+      <Modal show={showAddModal} onHide={handleCloseAddModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>TRUYENCC.VN</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form.Control type="text" placeholder="Nhập tác giả cần tìm..." />
+          <Button
+            variant="success"
+            style={{ marginTop: "10px", textAlign: "center" }}
+            onClick={() => setShowAddModal(true)}
+          >
+            Add
+          </Button>
+        </Modal.Body>
+      </Modal>
+      {/*Login modal */}
       <div className="container">
         <div className="card">
           <div className="card-header">
@@ -25,7 +48,11 @@ const ListAuthorComponent = (props) => {
                   />
                 </div>
                 <div className="fields_label">
-                  <Button variant="success" style={{ marginLeft: "10px" }}>
+                  <Button
+                    variant="success"
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => setShowAddModal(true)}
+                  >
                     <i class="fa-solid fa-plus"></i>
                   </Button>
                 </div>
@@ -40,12 +67,25 @@ const ListAuthorComponent = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td><Button variant="danger">Xóa</Button></td>
-                        <td><Button variant="success">Sửa</Button></td>
-                      </tr>
+                      {listAuthors.map((item, index) => {
+                        return (
+                          <tr key={item._id}>
+                            <td>{index + 1}</td>
+                            <td>{item.name}</td>
+                            <td>
+                              <Button
+                                variant="danger"
+                                onClick={() => handleDelete(item)}
+                              >
+                                Xóa
+                              </Button>
+                            </td>
+                            <td>
+                              <Button variant="success">Sửa</Button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </Table>
                 </div>

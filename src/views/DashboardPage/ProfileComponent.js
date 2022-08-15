@@ -20,12 +20,13 @@ const ProfileComponent = (props) => {
                         alt="avatar"
                       />
                     </div>
-                    <Button variant="success" className="mt-3">Change Avatar</Button>
+                    <Button variant="success" className="mt-3">
+                      Change Avatar
+                    </Button>
                   </Col>
                   <Col md="6" className="info">
-                  <div className="item">
-                      ID:{" "}
-                      <span style={{ color: "red" }}>{user._id}</span>
+                    <div className="item">
+                      ID: <span style={{ color: "red" }}>{user._id}</span>
                     </div>
                     <div className="item">
                       Username:{" "}
