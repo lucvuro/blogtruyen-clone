@@ -7,7 +7,7 @@ import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const AddMangaComponent = (props) => {
-  const { user, handleonSubmit, path } = props;
+  const { user, handleonSubmit, path,authorList,categoryList,sourceList,statusList } = props;
   const history = useHistory();
   const yupSchema = yup.object().shape({
     name: yup.string().required("Vui lòng nhập tên truyện"),
@@ -41,13 +41,6 @@ const AddMangaComponent = (props) => {
 
     ///.....
   };
-  const list = [
-    {
-      value: "Quynh",
-      label: "Xuan Quynh",
-    },
-    { value: "Huu", label: "To Huu" },
-  ];
   const onSubmit = async (data) => {
     await handleonSubmit(data);
     history.push(`${path}`);
@@ -118,7 +111,7 @@ const AddMangaComponent = (props) => {
                       <Select
                         {...field}
                         isMulti
-                        options={list}
+                        options={authorList}
                         menuPosition={"fixed"}
                         styles={customStyles}
                         placeholder="Chọn tác giả..."
@@ -144,7 +137,7 @@ const AddMangaComponent = (props) => {
                       <Select
                         {...field}
                         isMulti
-                        options={list}
+                        options={sourceList}
                         menuPosition={"fixed"}
                         styles={customStyles}
                         placeholder="Chọn nguồn, nhóm dịch..."
@@ -170,7 +163,7 @@ const AddMangaComponent = (props) => {
                       <Select
                         {...field}
                         isMulti
-                        options={list}
+                        options={categoryList}
                         menuPosition={"fixed"}
                         styles={customStyles}
                         placeholder="Chọn thể loại..."
@@ -223,7 +216,7 @@ const AddMangaComponent = (props) => {
                     render={({ field }) => (
                       <Select
                         {...field}
-                        options={list}
+                        options={statusList}
                         menuPosition={"fixed"}
                         styles={customStyles}
                         placeholder="Chọn tình trạng..."

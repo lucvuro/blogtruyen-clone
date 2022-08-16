@@ -67,7 +67,7 @@ const ListAuthorComponent = (props) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {listAuthors.map((item, index) => {
+                      {listAuthors?.map((item, index) => {
                         return (
                           <tr key={item._id}>
                             <td>{index + 1}</td>
