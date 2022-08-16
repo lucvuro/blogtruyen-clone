@@ -11,8 +11,11 @@ export const AuthorContext = createContext();
 const DashboardPage = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
   const listAuthors = useSelector((state) => state.authors.currentAuthors);
-  const listCategories = useSelector((state) => state.categories.currentCategories);
-  const listSources = useSelector((state) => state.sources.currentSources )
+  const listCategories = useSelector(
+    (state) => state.categories.currentCategories
+  );
+  const listSources = useSelector((state) => state.sources.currentSources);
+  const listMangas = useSelector((state) => state.mangas.currentMangas);
   const dispatch = useDispatch();
   const axiosClient = createAxios(user, dispatch);
   const history = useHistory();
@@ -48,7 +51,15 @@ const DashboardPage = () => {
   const { path, url } = useRouteMatch();
   return (
     <>
-      <AuthorContext.Provider value={{ user: user, listAuthors: listAuthors, listCategories: listCategories, listSources: listSources }}>
+      <AuthorContext.Provider
+        value={{
+          user: user,
+          listAuthors: listAuthors,
+          listCategories: listCategories,
+          listSources: listSources,
+          listMangas: listMangas
+        }}
+      >
         {user && (
           <div className="dashboard-container">
             <DashboardComponent user={user} path={path} url={url} />
