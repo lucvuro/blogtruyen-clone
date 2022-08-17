@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { AuthorContext } from "../DashboardPage";
+import { AuthorContext } from "../../App";
 import AddMangaComponent from "./AddMangaComponent";
 import { addMangaToDB } from "../../../api/mangaAPI";
 import { useDispatch } from "react-redux";

@@ -1,15 +1,20 @@
 import { setStart, setSuccess, setFail } from "../slices/sourceSlice";
-
-export const setSourceList = async (user, dispatch, axiosClient) => {
+import axios from "axios";
+export const setSourceList = async (dispatch) => {
   dispatch(setStart());
   try {
-    let res = await axiosClient.get("/source/getallSource", {
-      headers: {
-        token: "Bearer " + user.accessToken,
-      },
-    });
-    dispatch(setSuccess(res));
+    let res = await axios.get(
+      `${process.env.REACT_APP_API_URL}source/getallSource`
+    );
+    dispatch(setSuccess(res.data));
   } catch (err) {
     dispatch(setFail());
   }
+};
+
+export const getSource = async (id) => {
+  try {
+    let res = await axios.get(`${process.env.REACT_APP_API_URL}source/${id}`);
+    return res.data;
+  } catch (err) {}
 };

@@ -3,11 +3,25 @@ import TruyenHayComponent from "../components/TruyenHayComponent";
 import TruyenMoiDangComponent from "../components/TruyenMoiDangComponent";
 import { Container, Row, Col } from "react-bootstrap";
 import "./TruyenPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideBarComponent from "../components/SideBarComponent";
+import { useParams, useHistory } from "react-router-dom";
 import NavBar from "./NavBar";
+import { useSelector } from "react-redux";
 const TruyenPage = () => {
   const [isSorted, setisSorted] = useState(false);
+  const { id } = useParams();
+  const listMangas = useSelector((state) => state.mangas.currentMangas);
+  const [manga, setManga] = useState();
+  const history = useHistory();
+  useEffect(() => {
+    const temp_list = listMangas.filter((item) => item._id === id);
+    if (temp_list.length <= 0) {
+      history.push("/");
+    } else {
+      setManga(temp_list[0]);
+    }
+  }, []);
   return (
     <>
       <header className="header">
@@ -21,14 +35,15 @@ const TruyenPage = () => {
           <Col className="mt-3" md="8">
             <div className="truyen-info">
               <Row>
-                <div className="tieude">DETECTIVE CONAN</div>
+                <div className="tieude">{manga?.name}</div>
               </Row>
               <Row>
                 <Col md="12">
                   <div className="thumb">
                     <img
                       className="image-truyen"
-                      src="https://i7.xem-truyen.com/manga/19/19736/biatruyen.thumb_500x.jpg"
+                      src={manga?.image}
+                      alt={manga?.name}
                     />
                   </div>
                 </Col>
@@ -37,13 +52,10 @@ const TruyenPage = () => {
                 <Col md="12">
                   <div className="sumary">
                     <div className="title">SƠ LƯỢC</div>
-                    <div className="content">
-                      <p>
-                        Một bộ truyện gối đầu giường và gắn bó với biết bao thế
-                        hệ. Mình sẽ tổng hợp lại truyện ở nhiều nguồn và up lại
-                        Full truyện.
-                      </p>
-                    </div>
+                    <div
+                      className="content"
+                      dangerouslySetInnerHTML={{ __html: manga?.sumary }}
+                    ></div>
                   </div>
                 </Col>
               </Row>
@@ -53,38 +65,56 @@ const TruyenPage = () => {
                     <p>
                       <span>Tên khác: </span>
                       <span style={{ color: "red" }}>
-                        Thám tử lừng danh conan
+                        {manga?.anotherName}
                       </span>{" "}
                     </p>
                     <p>
                       <span> Tác giả: </span>
-                      <span className="label bg-success text-info">
-                        Gosho Aoyama
-                      </span>
+                      {manga?.authors?.map((item, index) => {
+                        return (
+                          <span
+                            className="label bg-success text-info"
+                            key={item._id}
+                          >
+                            {item.name}
+                          </span>
+                        );
+                      })}
                     </p>
                     <p>
                       <span> Nguồn: </span>
-                      <span className="label bg-danger text-info">
-                        Gosho Aoyama
-                      </span>
+                      {manga?.sources?.map((item, index) => {
+                        return (
+                          <span
+                            className="label bg-danger text-info"
+                            key={item._id}
+                          >
+                            {item.name}
+                          </span>
+                        );
+                      })}
                     </p>
                     <p>
                       <span> Thể loại: </span>
-                      <span>
-                        <a className="category" href="#">
-                          Gosho Aoyama
-                        </a>
-                      </span>
+                      {manga?.categories?.map((item, index) => {
+                        return (
+                          <span key={item._id}>
+                            <a className="category" href="#">
+                              {item.name}
+                            </a>
+                          </span>
+                        );
+                      })}
                     </p>
                     <p>
                       <span> Đăng bởi: </span>
                       <span>
                         <a className="text-info" href="#">
-                          Gosho Aoyama
+                          {manga?.users.name}
                         </a>
                       </span>
                       <span> Trạng thái: </span>
-                      <span style={{ color: "red" }}>Đang tiến hành</span>
+                      <span style={{ color: "red" }}>{manga?.status}</span>
                     </p>
                     <p>
                       <span>Số lượt xem: </span>

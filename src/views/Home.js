@@ -148,8 +148,8 @@ const Home = () => {
                               <div className="truyen-footer">
                                 <Container>
                                   <Row className="mt-3">
-                                    <Col md="3"><Link to={`/users/${item.users._id}`}>{item.users.name}</Link></Col>
-                                    <Col md="3">03/07/2022 23:44</Col>
+                                    <Col md="3"><i class="fa-solid fa-user"></i><Link to={`/users/${item.users._id}`}>{item.users.name}</Link></Col>
+                                    <Col md="3"><i class="fa-solid fa-calendar-days"></i>{item.createdAt}</Col>
                                     <Col md="3">105 chuong</Col>
                                     <Col md="3">So binh luan</Col>
                                   </Row>
