@@ -8,6 +8,9 @@ import { logoutUser } from "../../api/authAPI";
 import { createAxios } from "../../api/axiosClient";
 import AddMangaPage from "./AddManga/AddMangaPage";
 import ListAuthorPage from "./ListAuthor/ListAuthorPage";
+import MangaPostedFromUserPage from "./MangaPostedFromUser/MangaPostedFromUserPage";
+import MangaInfoPage from "./MangaInfo/MangaInfoPage";
+import AddChapterPage from "./AddChapter/AddChapterPage";
 const DashboardComponent = (props) => {
   const dispatch = useDispatch();
   const { user, path, url } = props;
@@ -125,6 +128,16 @@ const DashboardComponent = (props) => {
               <Route path={`${path}/tacgia`}>
                 <ListAuthorPage user={user} path={path} />
               </Route>
+              <Route path={`${path}/truyendadang/themchuongmoi`}>
+                <AddChapterPage user={user}/>
+              </Route>
+              <Route path={`${path}/truyendadang/:manga_id`}>
+                <MangaInfoPage path={path}/>
+              </Route>
+              <Route exact path={`${path}/truyendadang`}>
+                <MangaPostedFromUserPage user={user} />
+              </Route>
+              
             </Switch>
           </div>
         </div>

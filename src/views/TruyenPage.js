@@ -5,12 +5,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./TruyenPage.scss";
 import { useEffect, useState } from "react";
 import SideBarComponent from "../components/SideBarComponent";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useRouteMatch } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
+import { getAllChapterFromMangaID } from "../api/chapterAPI";
+import { increaseView } from "../api/mangaAPI";
 const TruyenPage = () => {
   const [isSorted, setisSorted] = useState(false);
   const { id } = useParams();
+  const [listChapters, setlistChapters] = useState([]);
   const listMangas = useSelector((state) => state.mangas.currentMangas);
   const [manga, setManga] = useState();
   const history = useHistory();
@@ -22,6 +25,19 @@ const TruyenPage = () => {
       setManga(temp_list[0]);
     }
   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllChapterFromMangaID(id);
+      setlistChapters(data);
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const increaseViews = async()=>{
+      await increaseView(id)
+    }
+    increaseViews();
+  },[])
   return (
     <>
       <header className="header">
@@ -118,7 +134,7 @@ const TruyenPage = () => {
                     </p>
                     <p>
                       <span>Số lượt xem: </span>
-                      <span style={{ color: "#f0f" }}> 223119</span>
+                      <span style={{ color: "#f0f" }}> {manga?.views}</span>
                       <span> Theo dõi: </span>
                       <span style={{ color: "#f0f" }}> 60</span>
                     </p>
@@ -131,7 +147,7 @@ const TruyenPage = () => {
                 <Col md="12">
                   <div className="list-chapters">
                     <div className="title">
-                      TỔNG HỢP (313 CHƯƠNG)
+                      TỔNG HỢP ({listChapters.length} CHƯƠNG)
                       <span
                         className="pull-right icon"
                         onClick={() => setisSorted(!isSorted)}
@@ -155,16 +171,26 @@ const TruyenPage = () => {
                         </Col>
                       </Row>
                       <div className="list-wrap">
-                        <Row className="item">
-                          <Col md="8">
-                            <span style={{ color: "#02770c" }}>
-                              Detective Conan File 313: Quyết Định Dũng Cảm
-                            </span>
-                          </Col>
-                          <Col md="4">
-                            <span> 07/09/2019 08:25 </span>
-                          </Col>
-                        </Row>
+                        {listChapters.length <= 0 && (
+                          <Row className="item">
+                            <Col>Chưa có chương nào</Col>
+                          </Row>
+                        )}
+                        {listChapters.length > 0 &&
+                          listChapters.map((item) => {
+                            return (
+                              <Row className="item" key={item._id}>
+                                <Col md="8">
+                                  <span style={{ color: "#02770c" }}>
+                                    {item.name}
+                                  </span>
+                                </Col>
+                                <Col md="4">
+                                  <span> {item.createdAt} </span>
+                                </Col>
+                              </Row>
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
