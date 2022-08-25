@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { Form, Button, Table } from "react-bootstrap";
 import Select from "react-select";
-import { useRouteMatch } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 const MangaInfoComponent = (props) => {
   const customStyles = {
     ///.....
@@ -16,7 +16,10 @@ const MangaInfoComponent = (props) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-  const { manga ,chapters} = props;
+  const { manga, chapters, deleteChapter,path } = props;
+  const handledeleteChapter = async (chapter) => {
+    await deleteChapter(chapter);
+  };
   return (
     <>
       <div className="container">
@@ -97,7 +100,12 @@ const MangaInfoComponent = (props) => {
                             <td>{index + 1}</td>
                             <td>{item.name}</td>
                             <td>
-                              <Button variant="danger" onClick={() => {}}>
+                              <Button
+                                variant="danger"
+                                onClick={() => {
+                                  deleteChapter(item);
+                                }}
+                              >
                                 Xóa
                               </Button>
                             </td>
@@ -107,6 +115,15 @@ const MangaInfoComponent = (props) => {
                           </tr>
                         );
                       })}
+                    <tr>
+                      <td colSpan={2}>
+                        <Link to={`${path}/truyendadang/themchuongmoi`}>
+                          <Button variant="success" type="button">
+                            Thêm
+                          </Button>
+                        </Link>
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
               </div>

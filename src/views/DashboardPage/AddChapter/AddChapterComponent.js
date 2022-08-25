@@ -4,7 +4,7 @@ import Select from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 const AddChapterComponent = (props) => {
-  const { listManga, handleonSubmit } = props;
+  const { listManga, handleonSubmit} = props;
   const yupSchema = yup.object().shape({
     name: yup.string().required("Vui lòng nhập tên chương"),
     fileImage: yup

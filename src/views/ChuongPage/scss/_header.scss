@@ -1,0 +1,17 @@
+.headerchuong {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  .headerchuong_tenchuong {
+    margin-top: 40px;
+  }
+  .headerchuong_tenchuong > h1 {
+    color: #000;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 20px 0 10px;
+    text-shadow: 0 0 4px #fff, 3px -5px 5px #fff, 5px -10px 8px #e6e3e3,
+      7px -15px 12px #cfcbcb, 15px -25px 18px #5f5e5e;
+    text-transform: uppercase;
+  }
+}

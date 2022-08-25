@@ -63,6 +63,7 @@ const AddChapterPage = (props) => {
       <AddChapterComponent
         listManga={listMangaFromUser}
         handleonSubmit={handleonSubmit}
+        user = {user}
       />
     </>
   );

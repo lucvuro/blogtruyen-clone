@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./TruyenPage.scss";
 import { useEffect, useState } from "react";
 import SideBarComponent from "../components/SideBarComponent";
-import { useParams, useHistory, useRouteMatch } from "react-router-dom";
+import { useParams, useHistory, useRouteMatch, Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import { useSelector } from "react-redux";
 import { getAllChapterFromMangaID } from "../api/chapterAPI";
@@ -33,11 +33,11 @@ const TruyenPage = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    const increaseViews = async()=>{
-      await increaseView(id)
-    }
+    const increaseViews = async () => {
+      await increaseView(id);
+    };
     increaseViews();
-  },[])
+  }, []);
   return (
     <>
       <header className="header">
@@ -181,9 +181,11 @@ const TruyenPage = () => {
                             return (
                               <Row className="item" key={item._id}>
                                 <Col md="8">
-                                  <span style={{ color: "#02770c" }}>
-                                    {item.name}
-                                  </span>
+                                  <Link to={`/chuong/${item._id}`}>
+                                    <span style={{ color: "#02770c" }}>
+                                      {item.name}
+                                    </span>
+                                  </Link>
                                 </Col>
                                 <Col md="4">
                                   <span> {item.createdAt} </span>

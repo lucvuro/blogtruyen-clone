@@ -132,7 +132,7 @@ const DashboardComponent = (props) => {
                 <AddChapterPage user={user}/>
               </Route>
               <Route path={`${path}/truyendadang/:manga_id`}>
-                <MangaInfoPage path={path}/>
+                <MangaInfoPage path={path} user={user}/>
               </Route>
               <Route exact path={`${path}/truyendadang`}>
                 <MangaPostedFromUserPage user={user} />

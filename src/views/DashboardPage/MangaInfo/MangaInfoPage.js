@@ -4,7 +4,14 @@ import { getManga} from "../../../api/mangaAPI";
 import { useEffect, useState } from "react";
 import { getAuthorAndConverToObjectReactSelect } from "../../../api/authorAPI";
 import { getAllChapterFromMangaID } from "../../../api/chapterAPI";
-const MangaInfoPage = () => {
+import { useDispatch } from "react-redux";
+import { createAxios } from "../../../api/axiosClient";
+import { deleteChapter } from "../../../api/chapterAPI";
+import {toast} from 'react-toastify'
+const MangaInfoPage = (props) => {
+  const {user, path} = props
+  const dispatch = useDispatch()
+  const axiosClient = createAxios(user,dispatch)
   const { manga_id } = useParams();
   const [manga, setManga] = useState();
   const [chapters, setChapters] = useState([])
@@ -28,10 +35,19 @@ const MangaInfoPage = () => {
     }
     fetchData();
   },[])
-  
+  const deleteChapterFromDB = async(chapter) => {
+    try{
+      await deleteChapter(user, chapter._id,axiosClient)
+      const temp_chapter = chapters.filter(item => item._id !== chapter._id)
+      setChapters(temp_chapter)
+      toast.success("Deleted Successfully")
+    }catch(err){
+      toast.error(err)
+    }
+  }
   return (
     <>
-      <MangaInfoComponent manga={manga} chapters={chapters}/>
+      <MangaInfoComponent manga={manga} chapters={chapters} deleteChapter={deleteChapterFromDB} path={path}/>
     </>
   );
 };

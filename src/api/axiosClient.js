@@ -16,7 +16,7 @@ const refreshToken = async () => {
     console.log(err);
   }
 };
-export const createAxios = (user, dispatch) => {
+export const createAxios = (user, dispatch)=> {
   const newInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
     headers: {

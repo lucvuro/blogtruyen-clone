@@ -14,6 +14,7 @@ import { setAuthorList } from "../api/authorAPI";
 import { setCategoryList } from "../api/categoryAPI";
 import { setSourceList } from "../api/sourceAPI";
 import { setMangaList } from "../api/mangaAPI";
+import ChuongPage from "./ChuongPage/ChuongPage";
 export const AuthorContext = createContext();
 function App() {
   const listAuthors = useSelector((state) => state.authors.currentAuthors);
@@ -81,6 +82,9 @@ function App() {
             </Route>
             <Route path="/dashboard">
               <DashboardPage />
+            </Route>
+            <Route path="/chuong/:chapter_id">
+              <ChuongPage/>
             </Route>
           </Switch>
         </AuthorContext.Provider>
